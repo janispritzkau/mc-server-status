@@ -7,6 +7,8 @@ a Minecraft server.
 
 ```
 mc-status eu.mineplex.com
+# with port
+mc-status localhost:25565
 ```
 
 ![Terminal output](https://gitlab.com/janispritzkau/mc-status/raw/master/terminal.png)
