@@ -9,4 +9,4 @@ a Minecraft server.
 mc-status eu.mineplex.com
 ```
 
-![Terminal output](./terminal.png)
+![Terminal output](https://gitlab.com/janispritzkau/mc-status/raw/master/terminal.png)
