@@ -68,7 +68,10 @@ export async function main() {
         return
     }
 
-    console.log("\n" + chat.format(status.description, { useAnsiCodes: true }) + "\n")
+    console.log("\n" + chat.format(status.description, {
+        useAnsiCodes: true,
+        maxLineLength: 112
+    }) + "\n")
     console.log(`\x1b[1mVersion: \x1b[0m ${status.version.name} (${status.version.protocol})`)
     console.log(`\x1b[1mPlayers: \x1b[0m ${status.players.online}/${status.players.max}`)
     console.log(`\x1b[1mFavicon: \x1b[0m ${
