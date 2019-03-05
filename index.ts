@@ -73,6 +73,6 @@ export async function main() {
     console.log(`\x1b[1mFavicon: \x1b[0m ${
         status.favicon ? `yes, ${status.favicon.length} bytes` : "no"
     }`)
-    console.log(`\x1b[1mPing:    \x1b[0m ${status.ping} ms`)
+    console.log(`\x1b[1mPing:    \x1b[0m ${status.ping} ms\n`)
 }
 
