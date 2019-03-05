@@ -1,0 +1,34 @@
+{
+  "name": "mc-status",
+  "version": "0.1.0",
+  "description": "Fetch the current status of a Minecraft server.",
+  "main": ".",
+  "types": ".",
+  "scripts": {
+    "prepare": "tsc"
+  },
+  "bin": "./mc-status",
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/janispritzkau/mc-status.git"
+  },
+  "keywords": [
+    "minecraft",
+    "status",
+    "server"
+  ],
+  "author": "Janis Pritzkau <janispritzkau@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://gitlab.com/janispritzkau/mc-status/issues"
+  },
+  "homepage": "https://gitlab.com/janispritzkau/mc-status#readme",
+  "dependencies": {
+    "mc-chat-format": "^1.0.3",
+    "mcproto": "^0.4.4"
+  },
+  "devDependencies": {
+    "@types/node": "^11.10.4",
+    "typescript": "^3.3.3333"
+  }
+}
