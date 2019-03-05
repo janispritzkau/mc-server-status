@@ -20,7 +20,7 @@ export interface Response {
 export const getStatus = (host: string, port?: number) => new Promise<Response>(async (res, rej) => {
     if (!port) port = await new Promise<number>(resolve => {
         dns.resolveSrv("_minecraft._tcp." + host, (err, addrs) => {
-            resolve(err || addrs.length == 0 ? 25565 : addrs[0].port)
+            resolve(err || addrs.length == 0 ? 25565 : (host = addrs[0].name, addrs[0].port))
         })
     })
 
