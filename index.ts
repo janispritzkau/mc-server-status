@@ -22,7 +22,7 @@ export const getStatus = (host: string, port = 25565) => new Promise<Response>((
         const client = new Connection(socket)
         client.onError = rej
 
-        client.send(new PacketWriter(0x0).writeVarInt(-1)
+        client.send(new PacketWriter(0x0).writeVarInt(404)
         .writeString(host).writeUInt16(port).writeVarInt(1))
         client.send(new PacketWriter(0x0))
 
