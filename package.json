@@ -1,5 +1,5 @@
 {
-  "name": "mc-status",
+  "name": "mc-server-status",
   "version": "0.1.0",
   "description": "Fetch the current status of a Minecraft server.",
   "main": ".",
@@ -7,7 +7,9 @@
   "scripts": {
     "prepare": "tsc"
   },
-  "bin": "./mc-status",
+  "bin": {
+    "mc-status": "./mc-status"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://gitlab.com/janispritzkau/mc-status.git"
