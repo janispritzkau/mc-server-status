@@ -42,6 +42,15 @@ async function main() {
 
         console.log(`\x1b[1mPing:    \x1b[0m ${ping} ms`)
     })
+
+    socket.on("error", err => {
+        const match = err.message.match(/ECONNREFUSED (.+)/)
+        if (match) {
+            console.error(`Could not connect to ${match[1]}`)
+        } else {
+            console.error(err.message)
+        }
+    })
 }
 
 main().catch(err => console.error(err))
