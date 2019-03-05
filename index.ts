@@ -17,13 +17,19 @@ export interface Response {
     ping: number
 }
 
-export const getStatus = (host: string, port = 25565) => new Promise<Response>((res, rej) => {
+export const getStatus = (host: string, port?: number) => new Promise<Response>(async (res, rej) => {
+    if (!port) port = await new Promise<number>(resolve => {
+        dns.resolveSrv("_minecraft._tcp." + host, (err, addrs) => {
+            resolve(err || addrs.length == 0 ? 25565 : addrs[0].port)
+        })
+    })
+
     const socket = connect({ host, port }, async () => {
         const client = new Connection(socket)
         client.onError = rej
 
         client.send(new PacketWriter(0x0).writeVarInt(404)
-        .writeString(host).writeUInt16(port).writeVarInt(1))
+        .writeString(host).writeUInt16(port!).writeVarInt(1))
         client.send(new PacketWriter(0x0))
 
         const status = (await client.nextPacket()).readJSON()
@@ -47,12 +53,7 @@ export async function main() {
 
     if (!host) return console.error("Please specify the server address")
 
-    let port = parseInt(portStr)
-    if (!port) await new Promise((res, rej) => {
-        dns.resolveSrv("_minecraft._tcp." + host, (err, addrs) => {
-            port = err || addrs.length == 0 ? 25565 : addrs[0].port, res()
-        })
-    })
+    const port = parseInt(portStr)
 
     let status: Response
     try {
