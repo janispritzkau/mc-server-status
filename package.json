@@ -1,6 +1,6 @@
 {
   "name": "mc-server-status",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "Fetch the current status of a Minecraft server.",
   "main": ".",
   "types": ".",
