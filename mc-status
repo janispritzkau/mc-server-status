@@ -1,2 +1,4 @@
 #!/usr/bin/env node
-require(".")
+require(".").main().catch(err => {
+    console.error(err)
+})
