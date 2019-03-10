@@ -9,6 +9,9 @@ a Minecraft server.
 mc-status eu.mineplex.com
 # with port
 mc-status localhost:25565
+
+# output json
+mc-status --json <address>
 ```
 
 ![Terminal output](https://gitlab.com/janispritzkau/mc-status/raw/master/terminal.png)

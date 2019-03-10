@@ -48,8 +48,12 @@ export const getStatus = (host: string, port?: number) => new Promise<Response>(
 })
 
 export async function main() {
-    const args = process.argv.slice(2)
-    let [host, portStr] = (args[0] || "").split(":")
+    let useJson = false, addr = null
+    for (const arg of process.argv.slice(2)) {
+        if (arg == "--json") useJson = true
+        else addr = arg
+    }
+    let [host, portStr] = (addr || "").split(":")
 
     if (!host) return console.error("Please specify the server address")
 
@@ -67,6 +71,8 @@ export async function main() {
         }
         return
     }
+
+    if (useJson) return console.log(JSON.stringify(status, null, 2))
 
     console.log("\n" + chat.format(status.description, { useAnsiCodes: true }) + "\n")
     console.log(`\x1b[1mVersion: \x1b[0m ${status.version.name} (${status.version.protocol})`)
