@@ -1,14 +1,14 @@
 {
   "name": "mc-server-status",
-  "version": "0.2.1",
-  "description": "Fetch the current status of a Minecraft server.",
-  "main": ".",
-  "types": ".",
+  "version": "1.0.0",
+  "description": "Fetch the status of a Minecraft server.",
+  "main": "lib",
+  "types": "lib",
   "scripts": {
     "prepare": "tsc"
   },
   "bin": {
-    "mc-status": "./mc-status"
+    "mc-status": "./bin/mc-status"
   },
   "repository": {
     "type": "git",

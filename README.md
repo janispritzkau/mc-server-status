@@ -1,7 +1,6 @@
-# Minecraft Server Status Checker
+# Minecraft Server Status
 
-A small utility for getting the description, player count and ping of
-a Minecraft server.
+A small utility for getting the description, player count and ping of a Minecraft server.
 
 ## Usage
 
@@ -21,7 +20,6 @@ You can also use it as a library:
 ```js
 const { getStatus } = require("mc-server-status")
 
-getStatus("eu.mineplex.com").then(response => {
-    console.log(response)
-})
+const status = await getStatus("eu.mineplex.com")
+console.log(status)
 ```

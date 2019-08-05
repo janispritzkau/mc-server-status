@@ -1,40 +1,8 @@
-import { Client, PacketWriter } from "mcproto"
-import * as chat from "mc-chat-format"
+#!/usr/bin/env node
+const chat = require("mc-chat-format")
+const { getStatus } = require("../lib")
 
-export interface Response {
-    version: {
-        name: string
-        protocol: number
-    }
-    players: {
-        max: number
-        online: number
-    }
-    description: string
-    favicon?: string
-    ping: number
-}
-
-export const getStatus = async (host: string, port?: number): Promise<Response> => {
-    const client = await Client.connect(host, port)
-
-    client.send(new PacketWriter(0x0).writeVarInt(404)
-        .writeString(host).writeUInt16(port!).writeVarInt(1))
-
-    client.send(new PacketWriter(0x0))
-
-    const status = (await client.nextPacket()).readJSON()
-    client.send(new PacketWriter(0x1).write(Buffer.alloc(8)))
-    const start = Date.now()
-
-    await client.nextPacket(0x1)
-    const ping = Date.now() - start
-
-    client.end()
-    return { ...status, ping }
-}
-
-export async function main() {
+async function main() {
     let useJson = false, addr = null
     for (const arg of process.argv.slice(2)) {
         if (arg == "--json") useJson = true
@@ -46,7 +14,7 @@ export async function main() {
 
     const port = parseInt(portStr)
 
-    let status: Response
+    let status
     try {
         status = await getStatus(host, port)
     } catch (err) {
@@ -69,3 +37,5 @@ export async function main() {
     }`)
     console.log(`\x1b[1mPing:    \x1b[0m ${status.ping} ms\n`)
 }
+
+main().catch(console.error)

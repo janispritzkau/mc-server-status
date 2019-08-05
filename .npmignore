@@ -1,6 +1,5 @@
 *
 
-!package*.json
-!*.js
-!*.d.ts
-!mc-status
+!package.json
+!lib
+!bin
