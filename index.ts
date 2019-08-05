@@ -1,7 +1,5 @@
-import { Connection, PacketWriter } from "mcproto"
+import { Client, PacketWriter } from "mcproto"
 import * as chat from "mc-chat-format"
-import { connect } from "net"
-import * as dns from "dns"
 
 export interface Response {
     version: {
@@ -17,35 +15,24 @@ export interface Response {
     ping: number
 }
 
-export const getStatus = (host: string, port?: number) => new Promise<Response>(async (res, rej) => {
-    if (!port) port = await new Promise<number>(resolve => {
-        dns.resolveSrv("_minecraft._tcp." + host, (err, addrs) => {
-            resolve(err || addrs.length == 0 ? 25565 : (host = addrs[0].name, addrs[0].port))
-        })
-    })
+export const getStatus = async (host: string, port?: number): Promise<Response> => {
+    const client = await Client.connect(host, port)
 
-    const socket = connect({ host, port }, async () => {
-        const client = new Connection(socket)
-        client.onError = rej
-
-        client.send(new PacketWriter(0x0).writeVarInt(404)
+    client.send(new PacketWriter(0x0).writeVarInt(404)
         .writeString(host).writeUInt16(port!).writeVarInt(1))
-        client.send(new PacketWriter(0x0))
 
-        const status = (await client.nextPacket()).readJSON()
+    client.send(new PacketWriter(0x0))
 
-        client.send(new PacketWriter(0x1).write(Buffer.alloc(8)))
-        const start = Date.now()
+    const status = (await client.nextPacket()).readJSON()
+    client.send(new PacketWriter(0x1).write(Buffer.alloc(8)))
+    const start = Date.now()
 
-        await client.nextPacketWithId(0x1)
-        const ping = Date.now() - start
+    await client.nextPacket(0x1)
+    const ping = Date.now() - start
 
-        socket.end()
-        res({ ...status, ping })
-    })
-    socket.on("close", () => rej(new Error("Connection closed by server")))
-    socket.on("error", rej)
-})
+    client.end()
+    return { ...status, ping }
+}
 
 export async function main() {
     let useJson = false, addr = null
@@ -82,4 +69,3 @@ export async function main() {
     }`)
     console.log(`\x1b[1mPing:    \x1b[0m ${status.ping} ms\n`)
 }
-
