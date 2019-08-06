@@ -1,11 +1,12 @@
 # Minecraft Server Status
 
-A small utility for getting the description, player count and ping of a Minecraft server.
+A small utility and library for getting the description, player count
+and ping of a Minecraft server.
 
 ## Usage
 
 ```bash
-mc-status eu.mineplex.com
+mc-status 2b2t.org
 # with port
 mc-status localhost:25565
 
@@ -20,6 +21,6 @@ You can also use it as a library:
 ```js
 const { getStatus } = require("mc-server-status")
 
-const status = await getStatus("eu.mineplex.com")
+const status = await getStatus("2b2t.org")
 console.log(status)
 ```

@@ -1,6 +1,6 @@
 {
   "name": "mc-server-status",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Fetch the status of a Minecraft server.",
   "main": "lib",
   "types": "lib",
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/janispritzkau/mc-status.git"
+    "url": "git+https://github.com/janispritzkau/mc-server-status.git"
   },
   "keywords": [
     "minecraft",
@@ -21,9 +21,6 @@
   ],
   "author": "Janis Pritzkau <janispritzkau@gmail.com>",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/janispritzkau/mc-status/issues"
-  },
   "dependencies": {
     "mc-chat-format": "^1.2.1",
     "mcproto": "^0.7.0"
