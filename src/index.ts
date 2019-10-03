@@ -11,25 +11,28 @@ export interface Status {
     }
     description: string
     favicon?: string
-    ping: number
+    ping?: number
 }
 
-export const getStatus = async (host: string, port?: number): Promise<Status> => {
+export const getStatus = async (host: string, port?: number, checkPing = true): Promise<Status> => {
     const client = await Client.connect(host, port)
 
     client.send(new PacketWriter(0x0).writeVarInt(404)
-        .writeString(host).writeUInt16(port!).writeVarInt(1))
+        .writeString(host).writeUInt16(client.socket.remotePort!).writeVarInt(1))
 
     client.send(new PacketWriter(0x0))
 
-    const status = (await client.nextPacket()).readJSON()
-    client.send(new PacketWriter(0x1).write(Buffer.alloc(8)))
-    const start = Date.now()
+    const status: Status = (await client.nextPacket()).readJSON()
 
-    await client.nextPacket(0x1)
-    const ping = Date.now() - start
+    if (checkPing) {
+        client.send(new PacketWriter(0x1).write(Buffer.alloc(8)))
+        const start = Date.now()
+
+        await client.nextPacket(0x1)
+        status.ping = Date.now() - start
+    }
 
     client.end()
 
-    return { ...status, ping }
+    return status
 }
