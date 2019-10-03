@@ -3,16 +3,16 @@ const chat = require("mc-chat-format")
 const { getStatus } = require("../lib")
 
 async function main() {
-    let useJson = false, addr = null
+    let useJson = false, args = []
     for (const arg of process.argv.slice(2)) {
         if (arg == "--json") useJson = true
-        else addr = arg
+        else if (!arg.startsWith("-")) args.push(arg)
     }
-    let [host, portStr] = (addr || "").split(":")
 
-    if (!host) return console.error("Please specify the server address")
+    if (args.length < 1) return console.error("Please specify a valid server address")
 
-    const port = parseInt(portStr)
+    const host = args[0]
+    const port = parseInt(args[1])
 
     let status
     try {

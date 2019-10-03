@@ -8,7 +8,7 @@ and ping of a Minecraft server.
 ```bash
 mc-status 2b2t.org
 # with port
-mc-status localhost:25565
+mc-status localhost 25565
 
 # output json
 mc-status --json <address>

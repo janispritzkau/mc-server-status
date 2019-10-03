@@ -1,6 +1,6 @@
 {
   "name": "mc-server-status",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "Fetch the status of a Minecraft server.",
   "main": "lib",
   "types": "lib",
@@ -23,7 +23,7 @@
   "license": "MIT",
   "dependencies": {
     "mc-chat-format": "^1.2.1",
-    "mcproto": "^0.7.0"
+    "mcproto": "^0.7.8"
   },
   "devDependencies": {
     "@types/node": "^10.14.14",
