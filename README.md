@@ -1,5 +1,8 @@
 # Minecraft Server Status
 
+[![npm](https://img.shields.io/npm/v/mc-server-status.svg)](https://www.npmjs.com/package/mc-server-status)
+[![downloads](https://img.shields.io/npm/dm/mc-server-status.svg)](https://www.npmjs.com/package/mc-server-status)
+
 A small utility and library for getting the description, player count
 and ping of a Minecraft server.
 
