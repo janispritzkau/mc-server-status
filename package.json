@@ -1,9 +1,9 @@
 {
   "name": "mc-server-status",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "Fetch the status of a Minecraft server.",
-  "main": "lib",
-  "types": "lib",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
     "prepare": "tsc"
   },
@@ -23,10 +23,10 @@
   "license": "MIT",
   "dependencies": {
     "mc-chat-format": "^1.2.1",
-    "mcproto": "^0.7.8"
+    "mcproto": "^0.8.2"
   },
   "devDependencies": {
-    "@types/node": "^10.14.14",
-    "typescript": "^3.5.3"
+    "@types/node": "^12.12.59",
+    "typescript": "^4.0.2"
   }
 }
