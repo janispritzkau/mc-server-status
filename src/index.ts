@@ -17,13 +17,16 @@ export interface Status {
 export interface StatusOptions {
     /** @default true */
     checkPing?: boolean
-    /** @default 10000 // ms */
+    /** @default 5000 // ms */
     timeout?: number
+    /** @default 736 // 1.16.1 */
+    protocol?: number
 }
 
 const defaultOptions: Partial<StatusOptions> = {
     checkPing: true,
-    timeout: 5000
+    timeout: 5000,
+    protocol: 736
 }
 
 export async function getStatus(host: string, port?: number | null, options?: StatusOptions): Promise<Status> {
@@ -34,7 +37,7 @@ export async function getStatus(host: string, port?: number | null, options?: St
         timeout: options.timeout
     })
 
-    client.send(new PacketWriter(0x0).writeVarInt(498)
+    client.send(new PacketWriter(0x0).writeVarInt(options.protocol!)
         .writeString(host).writeUInt16(client.socket.remotePort!)
         .writeVarInt(State.Status))
 
