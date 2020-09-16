@@ -1,6 +1,6 @@
 {
   "name": "mc-server-status",
-  "version": "2.0.0",
+  "version": "2.0.2",
   "description": "Fetch the status of a Minecraft server.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
